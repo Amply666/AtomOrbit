@@ -16,7 +16,7 @@ def create_svg(filename, num_electrons, orbit_radius, electron_radius, electron_
         orbit_points.append((x, y))
 
     #calcolo offset per orbite degli elettroni
-    offset = 360 / num_electrons
+    el_offset = 360 / num_electrons
     # crea il documento SVG
     svg_lines = []
     svg_lines.append('<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="200">')
@@ -41,7 +41,7 @@ def create_svg(filename, num_electrons, orbit_radius, electron_radius, electron_
     # disegna gli elettroni che orbitano attorno all'atomo
     for i in range(num_electrons):
         svg_lines.append('<circle id="elettrone%d" cx="%d" cy="%d" r="%d" fill="yellow" />' % (i, orbit_points[0][0], orbit_points[0][1], electron_radius))
-        svg_lines.append('<animateTransform xlink:href="#elettrone%d" attributeName="transform" attributeType="XML" type="rotate" from="%d 100 100" to="%d 100 100" dur="%.2f" repeatCount="indefinite" />' % (i, offset*i, (360+(offset*i)), electron_speed))
+        svg_lines.append('<animateTransform xlink:href="#elettrone%d" attributeName="transform" attributeType="XML" type="rotate" from="%d 100 100" to="%d 100 100" dur="%.2f" repeatCount="indefinite" />' % (i, el_offset*i, (360+(el_offset*i)), electron_speed))
         #svg_lines.append(f'<animateTransform xlink:href="#elettrones{str(i)}" attributeName="transform" attributeType="XML" type="rotate" from="0 100 100" to="360 100 100" dur="{str(electron_speed)}" repeatCount="indefinite" />')
     # definisce l'animazione per gli elettroni
     
@@ -60,4 +60,4 @@ def create_svg(filename, num_electrons, orbit_radius, electron_radius, electron_
 # 4 ==> electron speed
 # 5 ==> Element name 
 #            file     | 1|  2| 3| 4|   5|
-create_svg('atomo.svg', 2, 40, 3, 0.5, 'He')
+create_svg('atomo.svg', 2, 40, 3, 5, 'He')
